@@ -1,0 +1,52 @@
+name: Pipeline Logging
+
+on:
+  workflow_run:
+    workflows: ["Bot Tests", "Intelligence Benchmark"]
+    types: [completed]
+  push:
+    branches: ["main", "develop"]
+
+jobs:
+  log:
+    name: Collect and Store Pipeline Logs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Initialise logging infrastructure
+        run: python ci_cd/log_pipeline.py
+
+      - name: Upload pipeline log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-log-${{ github.run_id }}
+          path: pipeline.log
+          if-no-files-found: ignore
+
+      - name: Append log summary to job summary
+        if: always()
+        run: |
+          echo "## Pipeline Log" >> $GITHUB_STEP_SUMMARY
+          if [ -f pipeline.log ]; then
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            tail -n 50 pipeline.log >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          else
+            echo "No log file generated." >> $GITHUB_STEP_SUMMARY
+          fi
