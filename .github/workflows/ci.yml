@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "copilot/**"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  validate:
+    name: Validate connections config
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate connections.json
+        run: bash scripts/validate_connections.sh
+
+      - name: Check shell scripts
+        run: |
+          sudo apt-get install -y shellcheck
+          shellcheck scripts/*.sh

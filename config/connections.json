@@ -1,0 +1,72 @@
+{
+  "version": "1.0.0",
+  "description": "Cross-project connection registry for AllBots.com.ai",
+  "projects": {
+    "allbots_com": {
+      "name": "AllBots.com",
+      "url": "https://github.com/lippytm/AllBots.com",
+      "description": "Bot management and GitHub automation hub",
+      "platform": "github"
+    },
+    "factory_ai": {
+      "name": "Factory.ai",
+      "url": "https://github.com/lippytm/Factory.ai",
+      "description": "Workflow orchestration connecting GitHub, ChatGPT, and AllBots.com",
+      "platform": "github"
+    },
+    "lippytm_ai": {
+      "name": "lippytm.ai",
+      "url": "https://github.com/lippytm/lippytm.ai",
+      "description": "AI Web3 connection hub (Gist, GitLab, GitHub)",
+      "platform": "github"
+    },
+    "web3ai": {
+      "name": "Web3AI",
+      "url": "https://github.com/lippytm/Web3AI",
+      "description": "Web3 + AI integration layer",
+      "platform": "github"
+    },
+    "chatlippytm_ai_bots": {
+      "name": "Chatlippytm.ai.Bots",
+      "url": "https://github.com/lippytm/Chatlippytm.ai.Bots",
+      "description": "ManyChat / BotBuilders business-of-businesses hub",
+      "platform": "github"
+    },
+    "openclaw_ai": {
+      "name": "OpenClaw-lippytm.AI-",
+      "url": "https://github.com/lippytm/OpenClaw-lippytm.AI-",
+      "description": "Personal AI assistant creation and networking platform",
+      "platform": "github"
+    },
+    "ai_fullstack": {
+      "name": "AI-Full-Stack-AI-DevOps",
+      "url": "https://github.com/lippytm/AI-Full-Stack-AI-DevOps-Synthetic-Intelligence-Engines-AgentsBots-Web3-Websites-",
+      "description": "Full-stack AI/DevOps + Web3 websites",
+      "platform": "github"
+    },
+    "ai_time_machines": {
+      "name": "AI-Time-Machines",
+      "url": "https://github.com/lippytm/AI-Time-Machines",
+      "description": "AI agents + time-machine automation",
+      "platform": "github"
+    },
+    "time_machines_builders": {
+      "name": "Time-Machines-Builders-",
+      "url": "https://github.com/lippytm/Time-Machines-Builders-",
+      "description": "Learn-to-code AI automation and blockchain development",
+      "platform": "github"
+    },
+    "transparency_logic_bots": {
+      "name": "Transparency-Logic-Time-Machine-Bots-",
+      "url": "https://github.com/lippytm/Transparency-Logic-Time-Machine-Bots-",
+      "description": "Grand United Fields of Theories",
+      "platform": "github"
+    }
+  },
+  "platforms": {
+    "github": {
+      "base_api_url": "https://api.github.com",
+      "organization": "lippytm"
+    }
+  }
+}
