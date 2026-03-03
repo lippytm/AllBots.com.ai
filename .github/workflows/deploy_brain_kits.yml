@@ -1,0 +1,52 @@
+name: Deploy Brain Kits
+
+on:
+  workflow_dispatch:
+    inputs:
+      kit:
+        description: "Kit to deploy (starter | standard | full_stack)"
+        required: true
+        default: "standard"
+        type: choice
+        options:
+          - starter
+          - standard
+          - full_stack
+      target_repo:
+        description: "Target repository (owner/repo) — leave blank to deploy to all configured targets"
+        required: false
+        default: ""
+
+jobs:
+  deploy:
+    name: Deploy ${{ inputs.kit }} kit
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Deploy brain kit
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python deploy.py \
+            --kit "${{ inputs.kit }}" \
+            --target "${{ inputs.target_repo }}"
+
+      - name: Log deployment
+        run: |
+          echo "Deployed kit: ${{ inputs.kit }}"
+          echo "Target: ${{ inputs.target_repo || 'all configured repositories' }}"
+          echo "Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)"

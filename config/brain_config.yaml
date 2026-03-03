@@ -1,0 +1,56 @@
+# AI Brain Kits configuration for AllBots.com.ai
+# ─────────────────────────────────────────────
+# Copy this file and adjust values for your deployment.
+
+# ── OpenAI settings ─────────────────────────────────────────────────────────
+openai:
+  # Model used by brain modules.  Override per-brain in each kit if needed.
+  model: "gpt-4o"
+  # Temperature for response generation (0 = deterministic, 1 = creative).
+  temperature: 0.7
+  # Maximum tokens per OpenAI response.
+  max_tokens: 1024
+
+# ── Kit selection ────────────────────────────────────────────────────────────
+kit:
+  # Which kit to activate: starter | standard | full_stack
+  active: "standard"
+
+# ── Memory Brain ─────────────────────────────────────────────────────────────
+memory:
+  # Path to the JSON file used for long-term memory persistence.
+  store_path: "memory_store.json"
+  # Maximum number of conversation turns kept in short-term memory.
+  short_term_limit: 20
+
+# ── Learning Brain ───────────────────────────────────────────────────────────
+learning:
+  # Path to the JSONL interaction log.
+  log_path: "learning_log.jsonl"
+  # Number of recent interactions to include in analysis / recommendations.
+  analysis_limit: 50
+
+# ── Repository targets ───────────────────────────────────────────────────────
+# List of repositories that should receive brain kit deployments.
+# The deploy_brain_kits workflow uses this list.
+repositories:
+  targets:
+    - lippytm/AllBots.com.ai
+    - lippytm/AllBots.com
+    - lippytm/Factory.ai
+    - lippytm/Chatlippytm.ai.Bots
+    - lippytm/Web3AI
+    - lippytm/lippytm.ai
+    - lippytm/lippytm-lippytm.ai-tower-control-ai
+    - lippytm/The-Encyclopedia-of-Everything-Applied-ChatAIBots
+    - lippytm/AI-Full-Stack-AI-DevOps-Synthetic-Intelligence-Engines-AgentsBots-Web3-Websites-
+    - lippytm/AI-Time-Machines
+    - lippytm/Time-Machines-Builders-
+    - lippytm/Transparency-Logic-Time-Machine-Bots-
+    - lippytm/OpenClaw-lippytm.AI-
+    - lippytm/gatsby-starter-blog
+
+# ── Logging ──────────────────────────────────────────────────────────────────
+logging:
+  level: "INFO"
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
