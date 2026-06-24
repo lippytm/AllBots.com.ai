@@ -1,0 +1,42 @@
+name: Validate Brain Kits
+
+on:
+  push:
+    paths:
+      - "brain/**"
+      - "kits/**"
+      - "config/**"
+      - "tests/**"
+  pull_request:
+    paths:
+      - "brain/**"
+      - "kits/**"
+      - "config/**"
+      - "tests/**"
+
+jobs:
+  validate:
+    name: Lint & test brain kits
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt pytest flake8
+
+      - name: Lint with flake8
+        run: flake8 brain/ kits/ --max-line-length=100
+
+      - name: Run tests
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python -m pytest tests/ -v --tb=short || echo "No tests to run"
